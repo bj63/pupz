@@ -1,43 +1,40 @@
 package com.pupz.pupz.database.entity;
-import jakarta.persistence.*;
-import lombok.*;
 
-@Setter
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+
 @Getter
-@ToString
-@NoArgsConstructor
+@Setter
+@Builder
 @AllArgsConstructor
 @Entity
-@Table(name = "dog")
+@Table(name = "dogs")
 public class Dog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @Column(nullable = false, length = 100)
+
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
-    private int age;
-
-    @Column(nullable = false)
-    private String gender;
-
-
-    @Column(length = 255)
-    private String description;
-
-    @Column(length = 255)
-    private String imageUrl;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "breed_id", nullable = false) // Use 'breed_id' for the foreign key
+    @ManyToOne
+    @JoinColumn(name = "breed_id", nullable = false)
     private Breed breed;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false) // Ensure the user reference is also correct
-    private User user;
 
-    // Remove or update any unnecessary methods
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "role_id")
+    private UserRole role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
+
 }

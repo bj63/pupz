@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface DogDAO extends JpaRepository<Dog, Long> {
-    // Correct method signature for finding by ID with Long type
-    Optional<Dog> findById(Long id);
+
 }

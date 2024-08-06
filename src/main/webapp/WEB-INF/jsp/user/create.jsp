@@ -13,65 +13,26 @@
 <body>
 <jsp:include page="../include/header.jsp" />
 
-<div class="container">
-    <h1 class="text-center my-4">Create New User</h1>
-    <form:form modelAttribute="form" action="/user/create" method="post">
-        <div class="form-group">
-            <label for="username">Username</label>
-            <form:input path="username" id="username" class="form-control"/>
-            <form:errors path="username" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="name">First Name</label>
-            <form:input path="name" id="name" class="form-control"/>
-            <form:errors path="name" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="surname">Last Name</label>
-            <form:input path="surname" id="surname" class="form-control"/>
-            <form:errors path="surname" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="age">Age</label>
-            <form:input path="age" id="age" type="number" class="form-control"/>
-            <form:errors path="age" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="country">Country</label>
-            <form:input path="country" id="country" class="form-control"/>
-            <form:errors path="country" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="email">Email</label>
-            <form:input path="email" id="email" type="email" class="form-control"/>
-            <form:errors path="email" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <form:password path="password" id="password" class="form-control"/>
-            <form:errors path="password" cssClass="error"/>
-        </div>
-        <div class="form-group">
-            <label for="isOwner">Is Owner</label>
-            <form:checkbox path="isOwner" id="isOwner" class="form-check-input"/>
-            <form:errors path="isOwner" cssClass="error"/>
-        </div>
+<div class="main-content">
+    <h1>${form.userId == null ? 'Create' : 'Edit'} User</h1>
+    <form:form action="${pageContext.request.contextPath}/user/createSubmit" modelAttribute="form">
+        <form:hidden path="userId" />
 
-    <form method="post" action="${pageContext.request.contextPath}/file-upload" enctype="multipart/form-data">
-        <input type="hidden" name="employeeId" value="${employeeId}"/>
-
-        <div class="row align-items-center justify-content-center">
-            <div class="col-2">
-                <label for="file" class="col-form-label">File</label>
-            </div>
-            <div class="col-4">
-                <input type="file" id="file" name="file" class="form-control">
-            </div>
+        <div>
+            <form:label path="email">Email:</form:label>
+            <form:input path="email" type="email" required="required" />
+            <form:errors path="email" cssClass="error" />
         </div>
-
-        <button type="submit" class="btn btn-primary">Create User</button>
+        <div>
+            <form:label path="password">Password:</form:label>
+            <form:password path="password" required="required" />
+            <form:errors path="password" cssClass="error" />
+        </div>
+        <!-- Add any additional fields here -->
+        <div>
+            <input type="submit" value="${form.userId == null ? 'Create' : 'Update'} User">
+        </div>
     </form:form>
-</div>
 
 <jsp:include page="../include/footer.jsp" />
 

@@ -33,6 +33,21 @@ public class CreateUserFormBean {
     private Boolean isOwner;
 
     private String profileImage;
+    private Integer userId;
 
 
+    public boolean getUserId() {
+        return getUserId();
+    }
+
+    public Object getFirstName() {
+        return getFirstName();
+    }
+    public Object getLastName() {
+        return getLastName();
+    }
+
+    public void setUserId(Integer id) {
+        this.userId = id;
+    }
 }

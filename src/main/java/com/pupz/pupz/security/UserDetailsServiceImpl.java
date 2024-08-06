@@ -18,7 +18,7 @@ import java.util.*;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private UserDAO userDao;
+    private UserDAO userDAO;
 
     @Autowired
     private UserRoleDAO userRoleDao;
@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // fetch the user from the database - username is what the person entered into the username field on the login form
         // this User object is in the imports section
-        com.pupz.pupz.database.entity.User user = userDao.findByEmailIgnoreCase(username);
+        com.pupz.pupz.database.entity.User user = userDAO.findByEmailIgnoreCase(username);
 
         // if the user is null then what ever the person entered on the login form does not exist in the database
         // automatically throw an exception
@@ -43,7 +43,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         boolean accountNonLocked = true;
 
         // im using the user object from the database to get the user roles
-        List<UserRole> userRoles = userRoleDao.findByUserId(Math.toIntExact(user.getId()));
+        List<UserRole> userRoles = userRoleDao.findByUserId(user.getId());
         // passing the user roles to create the granted authorities
         Collection<? extends GrantedAuthority> authorities = buildGrantAuthorities(userRoles);
 

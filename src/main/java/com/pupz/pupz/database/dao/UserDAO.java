@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Optional;
 @Repository
 
-public interface UserDAO extends JpaRepository<User, Long> {
-    User findByEmailIgnoreCase(String email);
-// Custom query method using @Query
-    @Query("SELECT u FROM User u WHERE u.email = :email")
-    User findByEmail(@Param("email") String email);
-    }
 
+public interface UserDAO extends JpaRepository<User, Integer> {
+
+
+    User findByEmailIgnoreCase(String email);
+
+}

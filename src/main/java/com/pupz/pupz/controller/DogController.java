@@ -24,57 +24,5 @@ public class DogController {
     @Autowired
     private UserDAO userDAO;
 
-    @GetMapping("/index")
-    public ModelAndView index() {
-        ModelAndView response = new ModelAndView("dog/index");
-        List<Dog> dogs = dogDAO.findAll();
-        response.addObject("dogs", dogs);
-        return response;
-    }
 
-    @GetMapping("/create")
-    public ModelAndView create() {
-        ModelAndView response = new ModelAndView("dog/create");
-        response.addObject("form", new CreateDogFormBean());
-        List<User> users = userDAO.findAll();
-        response.addObject("users", users);
-        return response;
-    }
-
-    @PostMapping("/create")
-    public ModelAndView createSubmit(@Valid CreateDogFormBean form, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            ModelAndView response = new ModelAndView("dog/create");
-            response.addObject("form", form);
-            List<User> users = userDAO.findAll();
-            response.addObject("users", users);
-            return response;
-        }
-
-        Dog dog = new Dog();
-        dog.setName(form.getName());
-        dog.setAge(form.getAge());
-        dog.setGender(form.getGender());
-        dog.setDescription(form.getDescription());
-        dog.setImageUrl(form.getImageUrl());
-
-        User user = userDAO.findById(form.getUserId()).orElse(null);
-        dog.setUser(user);
-
-        dogDAO.save(dog);
-
-        return new ModelAndView("redirect:/dog/detail?id=" + dog.getId());
-    }
-
-    @GetMapping("/detail")
-    public ModelAndView detail(@RequestParam Long id) {
-        ModelAndView response = new ModelAndView("dog/detail");
-        Dog dog = dogDAO.findById(id).orElse(null);
-        if (dog == null) {
-            response.setViewName("redirect:/dog/index");
-        } else {
-            response.addObject("dog", dog);
-        }
-        return response;
-    }
 }

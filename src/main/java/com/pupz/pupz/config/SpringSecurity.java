@@ -31,7 +31,7 @@ public class SpringSecurity {
         // 3) users that are logged in AND have a user role that grants access to a resource
         http.authorizeRequests()
                 .requestMatchers(
-                        new AntPathRequestMatcher("/admin/**"),
+                     //   new AntPathRequestMatcher("/admin/**"),
                         new AntPathRequestMatcher("/employee/**")).authenticated()
                 .anyRequest().permitAll();
 

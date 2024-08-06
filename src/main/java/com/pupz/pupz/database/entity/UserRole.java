@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.util.*;
 
+
 @Setter
 @Getter
 @Entity
@@ -28,6 +29,5 @@ public class UserRole {
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
-
 
 }
