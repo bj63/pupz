@@ -22,5 +22,8 @@ public class Breed {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "breed_description")
+    private String description;
+
 
 }

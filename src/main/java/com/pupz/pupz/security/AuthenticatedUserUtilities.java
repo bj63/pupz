@@ -1,4 +1,5 @@
-package com.pupz.pupz.service;
+package com.pupz.pupz.security;
+
 import com.pupz.pupz.database.dao.UserDAO;
 import com.pupz.pupz.database.entity.User;
 import jakarta.servlet.http.HttpSession;
@@ -57,5 +58,6 @@ public class AuthenticatedUserUtilities {
         sc.setAuthentication(result);
         session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, sc);
     }
+
 
 }

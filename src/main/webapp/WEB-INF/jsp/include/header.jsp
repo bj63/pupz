@@ -31,10 +31,10 @@
                     <a class="nav-link text-center" aria-current="page" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center" href="/dogs">Dogs</a>
+                    <a class="nav-link" href="/search">Breeds</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center" href="${pageContext.request.contextPath}/user/create">Create User</a>
+                    <a class="nav-link text-center" href="${pageContext.request.contextPath}account/create-account">Create User</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-center" href="${pageContext.request.contextPath}/dog/create">Create Dog</a>

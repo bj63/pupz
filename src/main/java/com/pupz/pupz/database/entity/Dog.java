@@ -8,18 +8,19 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
 @Entity
 @Table(name = "dogs")
 public class Dog {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
 
+    @Column(name = "buy_price", columnDefinition = "DECIMAL")
+    private Double buyPrice;
 
-    @Column(nullable = false)
+    @Column(name = "dog_name", nullable = false)
     private String name;
 
     @ManyToOne
@@ -27,14 +28,31 @@ public class Dog {
     private Breed breed;
 
 
+    @Column(name = "dog_age", nullable = false)
+    private Integer age;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private UserRole role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "owner_id")
-    private User owner;
+    @Column (name = "dog_gender", nullable = false)
+    private String gender;
+
+
+
+    @Column (name = "dog_description", columnDefinition = "TEXT")
+    private String description;
+
+    @Column (name = "image_url")
+    private String imageUrl;
+
+    @Column (name = "is_vaccinated")
+    private boolean isVaccinated;
+
+    @Column (name = "is_sterilized")
+    private boolean isSterilized;
+
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

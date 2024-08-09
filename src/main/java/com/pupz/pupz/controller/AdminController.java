@@ -1,6 +1,6 @@
 package com.pupz.pupz.controller;
 import com.pupz.pupz.database.entity.User;
-import com.pupz.pupz.service.AuthenticatedUserUtilities;
+import com.pupz.pupz.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

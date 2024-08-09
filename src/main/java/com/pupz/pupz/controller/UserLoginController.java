@@ -3,8 +3,9 @@ package com.pupz.pupz.controller;
 import com.pupz.pupz.database.dao.UserDAO;
 import com.pupz.pupz.database.entity.User;
 import com.pupz.pupz.form.CreateAccountFormBean;
+import com.pupz.pupz.security.AuthenticatedUserUtilities;
 import com.pupz.pupz.service.UserService;
-import com.pupz.pupz.service.AuthenticatedUserUtilities;
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.*;
 import lombok.extern.slf4j.*;
@@ -13,11 +14,12 @@ import org.springframework.stereotype.*;
 import org.springframework.validation.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
-import org.springframework.web.servlet.mvc.support.*;
+
+
 @Slf4j
 @Controller
 @RequestMapping("/account")
-public class LoginController {
+public class UserLoginController {
 
     @Autowired
     private UserDAO userDao;
@@ -27,6 +29,21 @@ public class LoginController {
 
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
+
+    @PostConstruct
+    public void init() {
+        // Initialization code if needed
+    }
+
+
+
+    @GetMapping("/detail")
+    public ModelAndView detail(@RequestParam Integer userId) {
+        ModelAndView response = new ModelAndView("auth/detail");
+        User user = userDao.findById(userId);
+        response.addObject("user", user);
+        return response;
+    }
 
 
     @GetMapping("/loginPageUrl")
@@ -61,7 +78,7 @@ public class LoginController {
             response.addObject("form", form);
         } else {
             // there were no errors so we can create the new user in the database
-            userService.createUser(form);
+           userService.createUser(form);
             authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
         }
 
