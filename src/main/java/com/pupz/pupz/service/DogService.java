@@ -17,7 +17,10 @@ public class DogService {
     private DogDAO dogDao;
 
     @Autowired
-    private UserDAO userDao;
+    private BreedDAO breedDao;
+
+    @Autowired
+    private OwnerDAO ownerDao;
 
     public Dog createOrUpdateDog(CreateDogFormBean form) {
         // Log out the incoming variables that are in the CreateDogFormBean
@@ -37,12 +40,14 @@ public class DogService {
         dog.setVaccinated(form.isVaccinated());
         dog.setBuyPrice(form.getPrice());
         dog.setGender(form.getGender());
-
+        dog.setAge(form.getAge());
+        dog.setBreed(breedDao.findById(form.getBreedId()));
+        dog. setOwner(ownerDao.findById(form.getOwnerId()));
         // If you have a User associated with the Dog, you can set it here
         // Assuming you have a userId in your form
-        if (form.getUserId() != null) {
-            User user = userDao.findById(form.getUserId());
-            dog.setUser(user);
+        if (form.getOwnerId() != null) {
+           Owner owner = ownerDao.findById(form.getOwnerId());
+            dog.setOwner(owner);
         }
 
         // Save the dog to the database

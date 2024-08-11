@@ -12,6 +12,10 @@ public interface BreedDAO extends JpaRepository<Breed, Long> {
 
     // This is a magic query in that ... Spring Data JPA is able to use the method name to generate the query
     Breed findById(Integer id);
+
+
+    List<Breed> findAll();
+
     @Query("SELECT b FROM Breed b WHERE b.name LIKE CONCAT('%', :name, '%')")
     List<Breed> findByName(@Param("name") String name);
 

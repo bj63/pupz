@@ -9,7 +9,7 @@ import lombok.Setter;
 public class CreateDogFormBean {
     private Integer id;
 
-    private Integer userId;
+    private Integer ownerId;
 
     @NotEmpty(message = "Name is required")
     private String name;
@@ -26,19 +26,17 @@ public class CreateDogFormBean {
     // this is how to capture the boolean value of the checkbox either on or off
     private boolean isVaccinated;
 
-    @NotEmpty(message = "Breed is required")
-    private String breed;
+    private Integer breedId;
 
     @NotEmpty(message = "Gender is required")
     private String gender;
 
-    @NotEmpty(message = "Age is required")
-    private String age;
+    @NotNull(message = "Age is required")
+    @Min(value = 1, message = "Age must be at least 1")
+    private Integer age;
 
-    private String owner;
+  
 
-
-    private String radio;
 
 }
 

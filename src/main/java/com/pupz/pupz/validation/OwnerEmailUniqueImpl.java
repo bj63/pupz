@@ -4,13 +4,12 @@ package com.pupz.pupz.validation;
 import com.pupz.pupz.database.dao.UserDAO;
 import com.pupz.pupz.database.entity.User;
 import jakarta.validation.*;
-import lombok.extern.slf4j.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.util.*;
 
-public class EmployeeEmailUniqueImpl implements ConstraintValidator<EmployeeEmailUnique, String> {
-    public static final Logger LOG = LoggerFactory.getLogger(EmployeeEmailUniqueImpl.class);
+public class OwnerEmailUniqueImpl implements ConstraintValidator<OwnerEmailUnique, String> {
+    public static final Logger LOG = LoggerFactory.getLogger(OwnerEmailUniqueImpl.class);
 
     @Autowired
     private UserDAO UserDAO;

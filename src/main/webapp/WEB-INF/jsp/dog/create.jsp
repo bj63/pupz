@@ -14,145 +14,131 @@
 
 <div class="container">
     <div class="row pt-5 pb-5">
-        <form action="/dog/createSubmit" method="post">
+        <form:form action="/dog/createSubmit" method="post" modelAttribute="form">
             <spring:hasBindErrors name="form">
                 <div class="alert alert-danger" role="alert">
                     <form:errors path="*" />
                 </div>
             </spring:hasBindErrors>
 
-            <input type="hidden" name="id" value="${form.id}">
+            <form:hidden path="id" />
 
             <!-- Name Input Field -->
             <div class="row align-items-center justify-content-center">
                 <div class="col-2">
-                    <label for="nameId" class="col-form-label">Name</label>
+                    <form:label path="name" for="nameId" cssClass="col-form-label">Name</form:label>
                 </div>
                 <div class="col-4">
-                    <input type="text" id="nameId" name="name" class="form-control <c:if test="${bindingResult.hasFieldErrors('name')}">is-invalid</c:if>"
-                           value="${form.name}">
+                    <form:input id="nameId" path="name" cssClass="form-control ${bindingResult.hasFieldErrors('name') ? 'is-invalid' : ''}" />
+                    <form:errors path="name" cssClass="invalid-feedback" />
                 </div>
             </div>
-            <c:if test="${bindingResult.hasFieldErrors('name')}">
-                <div class="row align-items-center justify-content-center">
-                    <div class="offset-2 col-4">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('name')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
             <!-- Description Input Field -->
             <div class="row align-items-center justify-content-center pt-3">
                 <div class="col-2">
-                    <label for="descriptionId" class="col-form-label">Description</label>
+                    <form:label path="description" for="descriptionId" cssClass="col-form-label">Description</form:label>
                 </div>
                 <div class="col-4">
-                    <textarea id="descriptionId" name="description" class="form-control <c:if test="${bindingResult.hasFieldErrors('description')}">is-invalid</c:if>"
-                              rows="3">${form.description}</textarea>
+                    <form:textarea id="descriptionId" path="description" cssClass="form-control ${bindingResult.hasFieldErrors('description') ? 'is-invalid' : ''}" rows="3" />
+                    <form:errors path="description" cssClass="invalid-feedback" />
                 </div>
             </div>
-            <c:if test="${bindingResult.hasFieldErrors('description')}">
-                <div class="row align-items-center justify-content-center">
-                    <div class="offset-2 col-4">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('description')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
             <!-- Image URL Input Field -->
             <div class="row align-items-center justify-content-center pt-3">
                 <div class="col-2">
-                    <label for="imageUrlId" class="col-form-label">Image URL</label>
+                    <form:label path="imageUrl" for="imageUrlId" cssClass="col-form-label">Image URL</form:label>
                 </div>
                 <div class="col-4">
-                    <input type="text" id="imageUrlId" name="imageUrl" class="form-control <c:if test="${bindingResult.hasFieldErrors('imageUrl')}">is-invalid</c:if>"
-                           value="${form.imageUrl}">
+                    <form:input id="imageUrlId" path="imageUrl" cssClass="form-control ${bindingResult.hasFieldErrors('imageUrl') ? 'is-invalid' : ''}" />
+                    <form:errors path="imageUrl" cssClass="invalid-feedback" />
                 </div>
             </div>
-            <c:if test="${bindingResult.hasFieldErrors('imageUrl')}">
-                <div class="row align-items-center justify-content-center">
-                    <div class="offset-2 col-4">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('imageUrl')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
             <!-- Vaccinated Checkbox -->
             <div class="row align-items-center justify-content-center pt-3">
                 <div class="col-2">
-                    <label for="vaccinatedId" class="col-form-label">Vaccinated</label>
+                    <form:label path="vaccinated" for="vaccinatedId" cssClass="col-form-label">Vaccinated</form:label>
                 </div>
                 <div class="col-4">
-                    <input type="checkbox" id="vaccinatedId" name="vaccinated" class="form-check-input"
-                           <c:if test="${form.vaccinated}">checked</c:if>>
+                    <form:checkbox id="vaccinatedId" path="vaccinated" cssClass="form-check-input" />
                 </div>
             </div>
 
             <!-- Price Input Field -->
             <div class="row align-items-center justify-content-center pt-3">
                 <div class="col-2">
-                    <label for="priceId" class="col-form-label">Price</label>
+                    <form:label path="price" for="priceId" cssClass="col-form-label">Price</form:label>
                 </div>
                 <div class="col-4">
-                    <input type="number" id="priceId" name="price" step="0.01" class="form-control <c:if test="${bindingResult.hasFieldErrors('price')}">is-invalid</c:if>"
-                           value="${form.price}">
+                    <form:input id="priceId" path="price" type="number" step="0.01" cssClass="form-control ${bindingResult.hasFieldErrors('price') ? 'is-invalid' : ''}" />
+                    <form:errors path="price" cssClass="invalid-feedback" />
                 </div>
             </div>
-            <c:if test="${bindingResult.hasFieldErrors('price')}">
-                <div class="row align-items-center justify-content-center">
-                    <div class="offset-2 col-4">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('price')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
             <!-- Gender Select Field -->
             <div class="row align-items-center justify-content-center pt-3">
                 <div class="col-2">
-                    <label for="genderId" class="col-form-label">Gender</label>
+                    <form:label path="gender" for="genderId" cssClass="col-form-label">Gender</form:label>
                 </div>
                 <div class="col-4">
-                    <select id="genderId" name="gender" class="form-select <c:if test="${bindingResult.hasFieldErrors('gender')}">is-invalid</c:if>">
-                        <option value="">Select Gender</option>
-                        <option value="MALE" <c:if test="${form.gender == 'MALE'}">selected</c:if>>Male</option>
-                        <option value="FEMALE" <c:if test="${form.gender == 'FEMALE'}">selected</c:if>>Female</option>
-                    </select>
+                    <form:select id="genderId" path="gender" cssClass="form-select ${bindingResult.hasFieldErrors('gender') ? 'is-invalid' : ''}">
+                        <form:option value="" label="Select Gender" />
+                        <form:option value="MALE" label="Male" />
+                        <form:option value="FEMALE" label="Female" />
+                    </form:select>
+                    <form:errors path="gender" cssClass="invalid-feedback" />
                 </div>
             </div>
-            <c:if test="${bindingResult.hasFieldErrors('gender')}">
-                <div class="row align-items-center justify-content-center">
-                    <div class="offset-2 col-4">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('gender')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </c:if>
 
-            <div class="row justify-content-center pt-4">
-                <div class="col-6 text-center">
-                    <button type="submit" class="btn btn-primary">${form.id == null ? 'Create' : 'Update'} Dog</button>
+            <!-- Breed Select Field -->
+            <div class="row align-items-center justify-content-center pt-3">
+                <div class="col-2">
+                    <form:label path="breedId" for="breedId" cssClass="col-form-label">Breed</form:label>
+                </div>
+                <div class="col-4">
+                    <form:select id="breedId" path="breedId" cssClass="form-select ${bindingResult.hasFieldErrors('breedId') ? 'is-invalid' : ''}">
+                        <form:option value="" label="Select Breed" />
+                        <form:options items="${breeds}" itemValue="id" itemLabel="name" />
+                    </form:select>
+                    <form:errors path="breedId" cssClass="invalid-feedback" />
                 </div>
             </div>
-        </form>
+
+            <!-- Owner Select Field -->
+            <div class="row align-items-center justify-content-center pt-3">
+                <div class="col-2">
+                    <form:label path="ownerId" for="ownerId" cssClass="col-form-label">Owner</form:label>
+                </div>
+                <div class="col-4">
+                    <form:select id="ownerId" path="ownerId" cssClass="form-select ${bindingResult.hasFieldErrors('ownerId') ? 'is-invalid' : ''}">
+                        <form:option value="" label="Select Owner" />
+                        <form:options items="${owners}" itemValue="id" itemLabel="username" />
+                    </form:select>
+                    <form:errors path="ownerId" cssClass="invalid-feedback" />
+                </div>
+            </div>
+
+            <!-- Age Input Field -->
+            <div class="row align-items-center justify-content-center pt-3">
+                <div class="col-2">
+                    <form:label path="age" for="ageId" cssClass="col-form-label">Age</form:label>
+                </div>
+                <div class="col-4">
+                    <form:input id="ageId" path="age" type="number" min="0" cssClass="form-control ${bindingResult.hasFieldErrors('age') ? 'is-invalid' : ''}" />
+                    <form:errors path="age" cssClass="invalid-feedback" />
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="row align-items-center justify-content-center pt-3">
+                <div class="col-6 text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a href="${pageContext.request.contextPath}/dog/list" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </form:form>
     </div>
 </div>
 

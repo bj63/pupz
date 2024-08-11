@@ -1,6 +1,7 @@
 package com.pupz.pupz.database.dao;
 
 import com.pupz.pupz.database.entity.Dog;
+import com.pupz.pupz.database.entity.Owner;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,5 +16,8 @@ public interface DogDAO extends JpaRepository<Dog, Long> {
     Dog findById(Integer id);
 
    Dog findByNameIgnoreCase(String name);
+
+    List<Dog> findByOwnerId(Integer id);
+
 }
 

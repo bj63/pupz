@@ -34,13 +34,16 @@
                     <a class="nav-link" href="/search">Breeds</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center" href="${pageContext.request.contextPath}account/create-account">Create User</a>
+                    <a class="nav-link text-center" href="${pageContext.request.contextPath}/owner/create">Create User</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link text-center" href="${pageContext.request.contextPath}/dog/create">Create Dog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-center" href="/profile">Profile</a>
+                    <a class="nav-link" href="/file-upload">File Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/account/create-account">Create Account</a>
                 </li>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="nav-item">

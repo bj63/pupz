@@ -4,12 +4,12 @@ import jakarta.validation.*;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = EmployeeEmailUniqueImpl.class)
+@Constraint(validatedBy = OwnerEmailUniqueImpl.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EmployeeEmailUnique {
+public @interface OwnerEmailUnique {
 
-    String message() default "{EmployeeEmailUnique}";
+    String message() default "{OwnerEmailUnique}";
 
     Class<?>[] groups() default {};
 

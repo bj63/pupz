@@ -1,8 +1,12 @@
 package com.pupz.pupz.controller;
 
+import com.pupz.pupz.database.dao.BreedDAO;
 import com.pupz.pupz.database.dao.DogDAO;
+import com.pupz.pupz.database.dao.OwnerDAO;
 import com.pupz.pupz.database.dao.UserDAO;
+import com.pupz.pupz.database.entity.Breed;
 import com.pupz.pupz.database.entity.Dog;
+import com.pupz.pupz.database.entity.Owner;
 import com.pupz.pupz.database.entity.User;
 import com.pupz.pupz.form.CreateDogFormBean;
 import com.pupz.pupz.service.DogService;
@@ -32,15 +36,11 @@ public class DogController {
 
     @Autowired
     private DogService dogService;
+    @Autowired
+    private OwnerDAO ownerDAO;
+    @Autowired
+    private BreedDAO breedDAO;
 
-    public DogController() {
-        // Constructor initialization if needed
-    }
-
-    @PostConstruct
-    public void init() {
-        // Post-construction initialization if needed
-    }
 
     @GetMapping("/detail")
     public ModelAndView detail(@RequestParam Integer dogId) {
@@ -64,8 +64,9 @@ public class DogController {
     private void loadDropdowns(ModelAndView response) {
         // Load any necessary dropdown data
         // For example:
-        // List<User> owners = userDAO.findAll();
-        // response.addObject("owners", owners);
+        List<Owner> owners = ownerDAO.findAll();
+        List<Breed> breeds = breedDAO.findAll ();
+        response.addObject("owners", owners);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -85,6 +86,9 @@ public class DogController {
                 form.setVaccinated(dog.isVaccinated());
                 form.setPrice(dog.getBuyPrice());
                 form.setGender(dog.getGender());
+                form.setAge(dog.getAge());
+                form.setBreedId(dog.getBreed().getId());
+                form.setOwnerId(dog.getOwner().getId());
 
                 response.addObject("form", form);
             } else {

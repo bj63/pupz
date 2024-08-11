@@ -1,25 +1,30 @@
 package com.pupz.pupz.controller;
 
 import com.pupz.pupz.database.dao.UserDAO;
+import com.pupz.pupz.database.dao.UserRoleDAO;
+import com.pupz.pupz.database.entity.UserRole;
 import com.pupz.pupz.database.entity.User;
 import com.pupz.pupz.form.CreateAccountFormBean;
 import com.pupz.pupz.security.AuthenticatedUserUtilities;
 import com.pupz.pupz.service.UserService;
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpSession;
-import jakarta.validation.*;
-import lombok.extern.slf4j.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.validation.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.*;
-
+import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
 @RequestMapping("/account")
-public class UserLoginController {
+public class LoginController {
 
     @Autowired
     private UserDAO userDao;
@@ -29,22 +34,6 @@ public class UserLoginController {
 
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
-
-    @PostConstruct
-    public void init() {
-        // Initialization code if needed
-    }
-
-
-
-    @GetMapping("/detail")
-    public ModelAndView detail(@RequestParam Integer userId) {
-        ModelAndView response = new ModelAndView("auth/detail");
-        User user = userDao.findById(userId);
-        response.addObject("user", user);
-        return response;
-    }
-
 
     @GetMapping("/loginPageUrl")
     public ModelAndView loginPage(@RequestParam(required = false) String error) {
@@ -78,7 +67,7 @@ public class UserLoginController {
             response.addObject("form", form);
         } else {
             // there were no errors so we can create the new user in the database
-           userService.createUser(form);
+            userService.createUser(form);
             authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
         }
 

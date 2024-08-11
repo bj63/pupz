@@ -1,22 +1,19 @@
 package com.pupz.pupz.config;
-
-
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.config.annotation.method.configuration.*;
+import org.springframework.security.config.annotation.web.builders.*;
+import org.springframework.security.config.annotation.web.configuration.*;
+import org.springframework.security.crypto.bcrypt.*;
+import org.springframework.security.crypto.password.*;
+import org.springframework.security.web.*;
+import org.springframework.security.web.util.matcher.*;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SpringSecurity {
-
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -29,11 +26,13 @@ public class SpringSecurity {
         // 1) users that are not logged in and can see any public resource
         // 2) users that are logged in but do not have any user roles to grant access to a resource
         // 3) users that are logged in AND have a user role that grants access to a resource
+       // http.authorizeRequests()
+                //.anyRequest().permitAll();
         http.authorizeRequests()
                 .requestMatchers(
-                     //   new AntPathRequestMatcher("/admin/**"),
-                        new AntPathRequestMatcher("/employee/**")).authenticated()
-                .anyRequest().permitAll();
+                       new AntPathRequestMatcher("/admin/**"),
+                        new AntPathRequestMatcher("owner/**")).authenticated()
+               .anyRequest().permitAll();
 
 
         // the loginPage parameter is the actual URL of the login page
