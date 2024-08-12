@@ -67,6 +67,7 @@ public class DogController {
         List<Owner> owners = ownerDAO.findAll();
         List<Breed> breeds = breedDAO.findAll ();
         response.addObject("owners", owners);
+        response.addObject("breeds", breeds);
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)

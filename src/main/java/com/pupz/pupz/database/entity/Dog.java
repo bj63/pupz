@@ -46,13 +46,12 @@ public class Dog {
     @Column (name = "is_vaccinated")
     private boolean isVaccinated;
 
-    @Column (name = "is_sterilized")
-    private boolean isSterilized;
 
 
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Owner owner;
+
 
 
 }
