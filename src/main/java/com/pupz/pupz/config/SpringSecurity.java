@@ -31,7 +31,8 @@ public class SpringSecurity {
         http.authorizeRequests()
                 .requestMatchers(
                        new AntPathRequestMatcher("/admin/**"),
-                        new AntPathRequestMatcher("owner/**")).authenticated()
+                        new AntPathRequestMatcher("/dog/**"),
+                        new AntPathRequestMatcher("/owner/**")).authenticated()
                .anyRequest().permitAll();
 
 
